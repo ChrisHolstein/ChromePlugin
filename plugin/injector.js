@@ -3,33 +3,43 @@
 
 //you may not need cors
 //fetch('https://yourapi').then(function (response) {
-fetch("https://localhost:44320/sampleformdata/book", {mode: 'cors'}).then(function (response) {
+//fetch("https://localhost:44320/sampleformdata/book", {mode: 'cors'}).then(function (response) {
 //fetch(`https://localhost:44320/sampleformdata/?value=${value}`, {mode: 'cors'}).then(function (response) {
 	// The API call was successful!
-	if (response.ok) {
-		return response.json();
-	} else {
-		return Promise.reject(response);
-	}
-}).then(function (data) {
+	//if (response.ok) {
+	//	return response.json();
+	//} else {
+	//	return Promise.reject(response);
+	//}
+//}).then(function (data) {
     // This is the JSON from our response
-    fillforms(data);
-	console.log(data);
-}).catch(function (err) {
+    fillforms();
+	console.log();
+//}).catch(function (err) {
 	// There was an error
-	console.warn('Something went wrong.', err);
+//	console.warn('Something went wrong.', err);
+//});
+
+
+const screenshotTarget = document.body;
+
+html2canvas(screenshotTarget).then((canvas) => {
+    const base64image = canvas.toDataURL("image/png");
+    window.location.href = base64image;
 });
 
-function fillforms(data){
+function fillforms(){
 
-    fillField(document.querySelector('input[name="fullname"]'), data.title);
-    fillField(document.querySelector('input[name="email"]'), data.author);
-    fillField(document.querySelector('input[name="city"]'), data.pages);
+    fillField(document.querySelector('input[name="contact_first_name"]'), "James");
+    fillField(document.querySelector('input[name="contact_last_name"]'), "Jordan");
+    fillField(document.querySelector('input[name="contact_email"]'), "Test2@email.com");
+    fillField(document.querySelector('textarea[name="contact_message"]'), "I would like to make an enquiry");
+    fillField(document.querySelector('input[name="contact_phone_number"]'), "0400123123");
 
     //form2
-    fillField(document.getElementById('field1'), data.title);
-    fillField(document.querySelector('input[aria-label="field2"]'), data.author);
-    fillField(document.querySelector('input[class="field3"]'), data.pages);
+    fillField(document.getElementById('field1'), "Test2");
+    fillField(document.querySelector('input[aria-label="field2"]'), "Test2");
+    fillField(document.querySelector('input[class="field3"]'), "Test2");
 }
 
 function fillField(selector, value)
